@@ -1,0 +1,5 @@
+<main>
+  <app-sidebar></app-sidebar>
+  <app-step-one *ngIf="formDataService.getCurrentStep() === 1"></app-step-one>
+  <app-step-two *ngIf="formDataService.getCurrentStep() === 2"></app-step-two>
+</main>
