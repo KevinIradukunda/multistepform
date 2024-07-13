@@ -1,18 +1,25 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { StepOneComponent } from './components/step-one/step-one.component';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { FormDataService } from './Services/form-data.service';
-import { StepTwoComponent } from './components/step-two/step-two.component';
-import { PlanCardComponent } from './components/plan-card/plan-card.component';
 import { CommonModule } from '@angular/common';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { StepOneComponent } from './components/step-one/step-one.component';
+import { StepTwoComponent } from './components/step-two/step-two.component';
+import { StepThreeComponent } from './components/step-three/step-three.component';
+import { StepFourComponent } from './components/step-four/step-four.component';
+import { FormDataService } from './Services/form-data.service';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [StepOneComponent, SidebarComponent, StepTwoComponent, CommonModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  styleUrls: ['./app.component.css'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    SidebarComponent,
+    StepOneComponent,
+    StepTwoComponent,
+    StepThreeComponent,
+    StepFourComponent,
+  ],
 })
 export class AppComponent {
   constructor(public formDataService: FormDataService) {}

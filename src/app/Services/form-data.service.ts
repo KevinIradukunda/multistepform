@@ -12,6 +12,30 @@ export class FormDataService {
     },
     selectedPlan: null,
     billingType: 'monthly',
+    selectedAddOns: [],
+    plans: [
+      {
+        title: 'Arcade',
+        monthlyPrice: 9,
+        yearlyPrice: 90,
+        isSelected: false,
+        icon: 'assets/arcade-icon.png',
+      },
+      {
+        title: 'Advanced',
+        monthlyPrice: 12,
+        yearlyPrice: 120,
+        isSelected: false,
+        icon: 'assets/advanced-icon.png',
+      },
+      {
+        title: 'Pro',
+        monthlyPrice: 15,
+        yearlyPrice: 150,
+        isSelected: false,
+        icon: 'assets/pro-icon.png',
+      },
+    ],
   };
   private currentStep: number = 1;
 
@@ -39,6 +63,14 @@ export class FormDataService {
     return this.formData.billingType;
   }
 
+  setSelectedAddOns(addOns: any) {
+    this.formData.selectedAddOns = addOns;
+  }
+
+  getSelectedAddOns() {
+    return this.formData.selectedAddOns;
+  }
+
   setCurrentStep(step: number) {
     this.currentStep = step;
   }
@@ -47,29 +79,52 @@ export class FormDataService {
     return this.currentStep;
   }
 
-  getPlans() {
+  getAddOns() {
     return [
       {
-        title: 'Arcade',
-        monthlyPrice: '$9/mo',
-        yearlyPrice: '$90/yr',
-        icon: '/assets/icon-arcade.svg',
-        isSelected: false,
+        name: 'Online service',
+        description: 'Access to multiplayer games',
+        monthlyPrice: 1,
+        yearlyPrice: 10,
+        selected: false,
       },
       {
-        title: 'Advanced',
-        monthlyPrice: '$12/mo',
-        yearlyPrice: '$120/yr',
-        icon: '/assets/icon-advanced.svg',
-        isSelected: false,
+        name: 'Larger storage',
+        description: 'Extra 1TB of cloud save',
+        monthlyPrice: 2,
+        yearlyPrice: 20,
+        selected: false,
       },
       {
-        title: 'Pro',
-        monthlyPrice: '$15/mo',
-        yearlyPrice: '$150/yr',
-        icon: '/assets/icon-pro.svg',
-        isSelected: false,
+        name: 'Customizable profile',
+        description: 'Custom theme on your profile',
+        monthlyPrice: 2,
+        yearlyPrice: 20,
+        selected: false,
       },
     ];
+  }
+
+  getPlans() {
+    return this.formData.plans;
+  }
+
+  getTotalCost() {
+    const planCost =
+      this.formData.billingType === 'monthly'
+        ? this.formData.selectedPlan.monthlyPrice
+        : this.formData.selectedPlan.yearlyPrice;
+    const addOnsCost = this.formData.selectedAddOns.reduce(
+      (total: number, addOn: any) => {
+        return (
+          total +
+          (this.formData.billingType === 'monthly'
+            ? addOn.monthlyPrice
+            : addOn.yearlyPrice)
+        );
+      },
+      0
+    );
+    return planCost + addOnsCost;
   }
 }

@@ -2,4 +2,8 @@
   <app-sidebar></app-sidebar>
   <app-step-one *ngIf="formDataService.getCurrentStep() === 1"></app-step-one>
   <app-step-two *ngIf="formDataService.getCurrentStep() === 2"></app-step-two>
+  <app-step-three
+    *ngIf="formDataService.getCurrentStep() === 3"
+  ></app-step-three>
+  <app-step-four *ngIf="formDataService.getCurrentStep() === 4"></app-step-four>
 </main>
