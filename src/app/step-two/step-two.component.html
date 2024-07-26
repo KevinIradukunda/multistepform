@@ -1,0 +1,42 @@
+<div class="form-container">
+  <h2>Select your plan</h2>
+  <p>You have the option of monthly or yearly billing.</p>
+  <div class="plans-container">
+    <div class="plans">
+      <app-plan-card
+        *ngFor="let plan of plans"
+        [title]="plan.title"
+        [price]="
+          billingType === 'monthly'
+            ? '$' + plan.monthlyPrice + '/mo'
+            : '$' + plan.yearlyPrice + '/yr'
+        "
+        [icon]="plan.icon"
+        [isSelected]="plan.isSelected"
+        (selected)="selectPlan(plan)"
+      ></app-plan-card>
+    </div>
+  </div>
+  <div class="billtogglecontainer">
+    <div class="billing-toggle">
+      <span>Monthly</span>
+      <label class="switch">
+        <input
+          type="checkbox"
+          (change)="toggleBilling()"
+          [checked]="billingType === 'yearly'"
+        />
+        <span class="slider round"></span>
+      </label>
+      <span>Yearly</span>
+    </div>
+  </div>
+  <div class="buttonscontainer">
+    <button type="button" class="cancel-button" (click)="goBack()">
+      Go Back
+    </button>
+    <button type="button" class="next-step" (click)="nextStep()">
+      Next Step
+    </button>
+  </div>
+</div>

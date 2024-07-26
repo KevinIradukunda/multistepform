@@ -1,0 +1,48 @@
+<div class="form-container">
+  <h2>Pick add-ons</h2>
+  <p>Add-ons help enhance your gaming experience.</p>
+  <form [formGroup]="addOnsForm">
+    <div class="add-ons">
+      <div
+        class="add-on"
+        *ngFor="let addOn of addOnsControls; let i = index"
+        (click)="toggleAddOn(i)"
+        [class.selected]="addOn.get('selected')?.value"
+      >
+        <input
+          type="checkbox"
+          [formControl]="getFormControl(addOn.get('selected'))"
+        />
+        <div class="add-on-details">
+          <h3>{{ addOn.get("name")?.value }}</h3>
+          <p>{{ addOn.get("description")?.value }}</p>
+        </div>
+        <div class="add-on-price">
+          {{
+            billingType === "monthly"
+              ? "+$" + addOn.get("monthlyPrice")?.value + "/mo"
+              : "+$" + addOn.get("yearlyPrice")?.value + "/yr"
+          }}
+        </div>
+      </div>
+    </div>
+    <div class="total-cost">
+      <!-- <h3>
+        Total Cost:
+        {{
+          billingType === "monthly"
+            ? "$" + totalCost + "/mo"
+            : "$" + totalCost + "/yr"
+        }}
+      </h3> -->
+    </div>
+    <div class="navigation-buttons">
+      <button type="button" class="cancel-button" (click)="goBack()">
+        Go Back
+      </button>
+      <button type="button" class="next-step" (click)="nextStep()">
+        Next Step
+      </button>
+    </div>
+  </form>
+</div>

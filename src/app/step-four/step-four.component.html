@@ -1,0 +1,51 @@
+<div class="form-container">
+  <h2>Finishing up</h2>
+  <p>Double-check everything looks OK before confirming.</p>
+  <div class="summary">
+    <div class="summary-item">
+      <div class="item-title">
+        <span class="titleitembold"
+          >{{ selectedPlan.title }} ({{ billingType }})</span
+        ><br />
+        <a href="#" (click)="changePlan()" class="change">Change</a>
+      </div>
+      <div class="item-price">
+        {{
+          billingType === "monthly"
+            ? "$" + selectedPlan.monthlyPrice + "/mo"
+            : "$" + selectedPlan.yearlyPrice + "/yr"
+        }}
+      </div>
+    </div>
+    <div *ngFor="let addOn of selectedAddOns" class="summary-item">
+      <div class="item-title">{{ addOn.name }}</div>
+      <div class="item-price">
+        {{
+          billingType === "monthly"
+            ? "$" + addOn.monthlyPrice + "/mo"
+            : "$" + addOn.yearlyPrice + "/yr"
+        }}
+      </div>
+    </div>
+    <div class="summary-total">
+      <div class="total-title">
+        Total (per {{ billingType === "monthly" ? "month" : "year" }})
+      </div>
+      <div class="total-price">
+        {{
+          billingType === "monthly"
+            ? "$" + totalCost + "/mo"
+            : "$" + totalCost + "/yr"
+        }}
+      </div>
+    </div>
+  </div>
+  <div class="buttonscontainer">
+    <button type="button" class="cancel-button" (click)="goBack()">
+      Go Back
+    </button>
+    <button type="button" class="confirm-button" (click)="confirm()">
+      Confirm
+    </button>
+  </div>
+</div>

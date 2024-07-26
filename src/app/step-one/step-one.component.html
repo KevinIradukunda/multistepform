@@ -1,0 +1,96 @@
+<div class="form-container">
+  <h2>Personal info</h2>
+  <p>Please provide your name, email address, and phone number.</p>
+  <form [formGroup]="personalInfoForm" (ngSubmit)="onSubmit()">
+    <div
+      class="form-group"
+      [class.error]="
+        personalInfoForm.get('name')?.invalid &&
+        (personalInfoForm.get('name')?.dirty ||
+          personalInfoForm.get('name')?.touched)
+      "
+    >
+      <label for="name">
+        Name
+        <span
+          class="error-message"
+          *ngIf="
+            personalInfoForm.get('name')?.invalid &&
+            (personalInfoForm.get('name')?.dirty ||
+              personalInfoForm.get('name')?.touched)
+          "
+        >
+          Name is required.
+        </span>
+      </label>
+      <input
+        type="text"
+        id="name"
+        formControlName="name"
+        placeholder="please enter name"
+      />
+    </div>
+    <div
+      class="form-group"
+      [class.error]="
+        personalInfoForm.get('email')?.invalid &&
+        (personalInfoForm.get('email')?.dirty ||
+          personalInfoForm.get('email')?.touched)
+      "
+    >
+      <label for="email">
+        Email Address
+        <span
+          class="error-message"
+          *ngIf="
+            personalInfoForm.get('email')?.invalid &&
+            (personalInfoForm.get('email')?.dirty ||
+              personalInfoForm.get('email')?.touched)
+          "
+        >
+          <span *ngIf="personalInfoForm.get('email')?.errors?.['required']"
+            >Email is required.</span
+          >
+          <span *ngIf="personalInfoForm.get('email')?.errors?.['email']"
+            >Enter a valid email.</span
+          >
+        </span>
+      </label>
+      <input
+        type="email"
+        id="email"
+        formControlName="email"
+        placeholder="please enter your email"
+      />
+    </div>
+    <div
+      class="form-group"
+      [class.error]="
+        personalInfoForm.get('phone')?.invalid &&
+        (personalInfoForm.get('phone')?.dirty ||
+          personalInfoForm.get('phone')?.touched)
+      "
+    >
+      <label for="phone">
+        Phone Number
+        <span
+          class="error-message"
+          *ngIf="
+            personalInfoForm.get('phone')?.invalid &&
+            (personalInfoForm.get('phone')?.dirty ||
+              personalInfoForm.get('phone')?.touched)
+          "
+        >
+          Phone number is required.
+        </span>
+      </label>
+      <input
+        type="tel"
+        id="phone"
+        formControlName="phone"
+        placeholder="please enter your person number"
+      />
+    </div>
+    <button type="submit" class="next-step">Next Step</button>
+  </form>
+</div>
